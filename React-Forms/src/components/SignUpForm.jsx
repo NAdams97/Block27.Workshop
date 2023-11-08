@@ -23,6 +23,7 @@ export default function SignUpForm() {
             })
             let result = response.json()
             console.log(result)
+            setToken(result.token)
             setUsername("")
             setPassword("")
         } catch (error) {

@@ -8,8 +8,9 @@ function App() {
 
   return (
     <>
-     <Authenticate />
-     <SignUpForm />
+    const [token, setToken] = useState(null)
+     <Authenticate token = {token} setToken = {setToken}/>
+     <SignUpForm token = {token} setToken = {setToken}/>
     </>
   )
 }
