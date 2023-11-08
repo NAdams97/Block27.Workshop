@@ -9,17 +9,37 @@ export default function SignUpForm() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log("Hello World")
+        
+        try {
+           let response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            })
+            let result = response.json()
+            console.log(result)
+            setUsername("")
+            setPassword("")
+        } catch (error) {
+            setError(error.message)
+        }
+        console.log("test")
     }
 
     return <>
     <h2>Sign Up!</h2>
+    {error && <p>{error}</p>}
     <form  onClick = {handleSubmit} >
         <label>
-            Username: <input value = {username} onChange={(u) => setUsername(u.target.value)} />
+            Username: <input value = {username} onChange={(e) => setUsername(e.target.value)} />
         </label>
         <label>
-            Password: <input value = {password} onChange={(p) => setPassword(p.target.value)} />
+            Password: <input value = {password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <button>Submit</button>
     </form>
